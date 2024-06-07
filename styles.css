@@ -9,7 +9,7 @@ body {
     margin: 0;
 }
 
-#container {
+.app-container {
     background: rgba(255, 255, 255, 0.1);
     padding: 20px;
     border-radius: 10px;

@@ -42,13 +42,13 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             const reader = new FileReader();
             reader.onload = () => {
-                addImage(reader.result, '');
+                addImage(file.name, reader.result);
             };
             reader.readAsDataURL(file);
         }
     }
 
-    function addImage(src, description) {
+    function addImage(name, src) {
         const div = document.createElement('div');
         div.className = 'file-item';
 
@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
         img.src = src;
 
         const textarea = document.createElement('textarea');
-        textarea.value = description;
+        textarea.placeholder = "Add a description";
 
         const actions = document.createElement('div');
         actions.className = 'actions';
@@ -65,9 +65,13 @@ document.addEventListener('DOMContentLoaded', () => {
         checkBtn.className = 'check';
         checkBtn.innerHTML = '✔';
         checkBtn.addEventListener('click', () => {
+            if (textarea.value.trim() === '') {
+                alert('Please add a description before saving.');
+                return;
+            }
             textarea.disabled = true;
-            alert('Description has been added.');
             saveImages();
+            alert('Description has been added.');
         });
 
         const deleteBtn = document.createElement('button');
@@ -103,7 +107,45 @@ document.addEventListener('DOMContentLoaded', () => {
     function loadImages() {
         const items = JSON.parse(localStorage.getItem('images')) || [];
         for (const { img, description } of items) {
-            addImage(img, description);
+            addImageFromStorage(img, description);
         }
+    }
+
+    function addImageFromStorage(src, description) {
+        const div = document.createElement('div');
+        div.className = 'file-item';
+
+        const img = document.createElement('img');
+        img.src = src;
+
+        const textarea = document.createElement('textarea');
+        textarea.placeholder = "Add a description";
+        textarea.value = description || "";
+        textarea.disabled = true;
+
+        const actions = document.createElement('div');
+        actions.className = 'actions';
+
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'check';
+        checkBtn.innerHTML = '✔';
+        checkBtn.disabled = true;
+
+        const deleteBtn = document.createElement('button');
+        deleteBtn.className = 'delete';
+        deleteBtn.innerHTML = '✖';
+        deleteBtn.addEventListener('click', () => {
+            fileList.removeChild(div);
+            saveImages();
+        });
+
+        actions.appendChild(checkBtn);
+        actions.appendChild(deleteBtn);
+
+        div.appendChild(img);
+        div.appendChild(textarea);
+        div.appendChild(actions);
+
+        fileList.appendChild(div);
     }
 });
