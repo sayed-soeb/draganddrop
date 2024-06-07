@@ -1,0 +1,89 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f06292;
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+#container {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+h1 {
+    margin: 0 0 20px;
+}
+
+.dropzone {
+    width: 85%;
+    padding: 50px 20px;
+    border: 2px dashed #ffffff;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    position: relative;
+    cursor: pointer;
+}
+
+#fileInput {
+    display: none;
+}
+
+#browse {
+    color: #ffccbc;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.file-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.file-item {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    margin: 10px 0;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.file-item img {
+    width: 50px;
+    height: 50px;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+.file-item textarea {
+    flex-grow: 1;
+    margin-right: 10px;
+    padding: 5px;
+    border-radius: 5px;
+    border: none;
+    resize: none;
+}
+
+.file-item .actions {
+    display: flex;
+    align-items: center;
+}
+
+.file-item .actions .check,
+.file-item .actions .delete {
+    background: #ffffff;
+    color: #f06292;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 5px;
+}
